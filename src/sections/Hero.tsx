@@ -90,7 +90,7 @@ export default function Hero() {
 
                     {/* Name */}
                     <motion.h1 variants={itemVariants} className="text-5xl md:text-7xl font-extrabold tracking-tight mb-4">
-                        Hi, I'm <span className="text-primary-500">Dheeraj</span> Prajapat
+                        Hi, I&apos;m <span className="text-primary-500">Dheeraj</span> Prajapat
                     </motion.h1>
 
                     {/* Title with Typing Effect */}
