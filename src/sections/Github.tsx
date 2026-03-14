@@ -107,19 +107,17 @@ export default function GithubSection() {
                     ) : (
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             {repos.map((repo, idx) => (
-                                <motion.a
+                                <motion.div
                                     key={repo.id}
-                                    href={repo.html_url}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
                                     initial={{ opacity: 0, y: 20 }}
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
                                     transition={{ duration: 0.4, delay: idx * 0.1 }}
                                     whileHover={{ scale: 1.02, y: -5 }}
-                                    className="glass-card p-6 flex flex-col h-full group border border-white/5 hover:border-primary-500/40 relative overflow-hidden"
+                                    className="h-full"
                                 >
-                                    <div className="absolute inset-0 bg-gradient-to-r from-primary-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                                    <Link href={`/repositories/${repo.name}`} className="glass-card p-6 flex flex-col h-full group border border-white/5 hover:border-primary-500/40 relative overflow-hidden block">
+                                        <div className="absolute inset-0 bg-gradient-to-r from-primary-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
                                     <div className="flex justify-between items-start mb-4 relative z-10">
                                         <h4 className="text-lg font-bold text-primary-500 group-hover:text-primary-400 transition-colors flex items-center gap-2">
@@ -147,7 +145,8 @@ export default function GithubSection() {
                                             <GitFork className="w-4 h-4" /> {repo.forks_count}
                                         </span>
                                     </div>
-                                </motion.a>
+                                    </Link>
+                                </motion.div>
                             ))}
                         </div>
                     )}
