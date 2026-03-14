@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState, useMemo } from "react";
+import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Github, Star, GitFork, ExternalLink, Search, ArrowLeft, ChevronLeft, ChevronRight } from "lucide-react";
 import Link from "next/link";
@@ -19,6 +20,7 @@ interface Repo {
 const ITEMS_PER_PAGE = 6;
 
 export default function RepositoriesPage() {
+    const router = useRouter();
     const [repos, setRepos] = useState<Repo[]>([]);
     const [loading, setLoading] = useState(true);
     const [searchQuery, setSearchQuery] = useState("");
@@ -66,16 +68,21 @@ export default function RepositoriesPage() {
     }, [searchQuery]);
 
     return (
-        <div className="min-h-screen pt-32 pb-20 relative">
+        <div className="min-h-screen pb-20 relative">
+            {/* Top Bar with Back Button */}
+            <div className="sticky top-0 left-0 w-full z-50 glass py-4 border-b border-white/5 mb-8">
+                <div className="container mx-auto px-6 max-w-6xl flex items-center">
+                    <button
+                        onClick={() => router.back()}
+                        className="inline-flex items-center text-sm font-bold text-foreground hover:text-primary-500 transition-colors group"
+                    >
+                        <ArrowLeft className="w-5 h-5 mr-2 group-hover:-translate-x-1 transition-transform" />
+                        Back 
+                    </button>
+                </div>
+            </div>
+
             <div className="container mx-auto px-6 max-w-6xl relative z-10">
-                {/* Back Link */}
-                <Link
-                    href="/#github"
-                    className="inline-flex items-center text-sm font-medium text-foreground/60 hover:text-primary-500 transition-colors mb-8 group"
-                >
-                    <ArrowLeft className="w-4 h-4 mr-2 group-hover:-translate-x-1 transition-transform" />
-                    Back to Portfolio
-                </Link>
 
                 {/* Header */}
                 <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-12">
@@ -123,21 +130,19 @@ export default function RepositoriesPage() {
                     <>
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
                             <AnimatePresence mode="popLayout">
-                                {paginatedRepos.map((repo, idx) => (
-                                    <motion.a
+                                {paginatedRepos.map((repo) => (
+                                    <motion.div
                                         key={repo.id}
-                                        href={repo.html_url}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
                                         layout
                                         initial={{ opacity: 0, scale: 0.9 }}
                                         animate={{ opacity: 1, scale: 1 }}
                                         exit={{ opacity: 0, scale: 0.9 }}
                                         transition={{ duration: 0.3 }}
                                         whileHover={{ scale: 1.02, y: -5 }}
-                                        className="glass-card p-6 flex flex-col h-full group border border-white/5 hover:border-primary-500/40 relative overflow-hidden"
+                                        className="h-full"
                                     >
-                                        <div className="absolute inset-0 bg-gradient-to-r from-primary-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                                        <Link href={`/repositories/${repo.name}`} className="glass-card p-6 flex flex-col h-full group border border-white/5 hover:border-primary-500/40 relative overflow-hidden block">
+                                            <div className="absolute inset-0 bg-gradient-to-r from-primary-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
                                         <div className="flex justify-between items-start mb-4 relative z-10">
                                             <h4 className="text-lg font-bold text-primary-500 group-hover:text-primary-400 transition-colors flex items-center gap-2">
@@ -165,7 +170,8 @@ export default function RepositoriesPage() {
                                                 <GitFork className="w-4 h-4" /> {repo.forks_count}
                                             </span>
                                         </div>
-                                    </motion.a>
+                                        </Link>
+                                    </motion.div>
                                 ))}
                             </AnimatePresence>
                         </div>
