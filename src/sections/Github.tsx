@@ -4,9 +4,14 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { GitHubCalendar } from "react-github-calendar";
 import { Github, Star, GitFork, ExternalLink, ArrowRight } from "lucide-react";
+import { Skeleton } from "@/components/ui/Skeleton";
 import Link from "next/link";
 
+
 interface Repo {
+// ... existing interface ...
+// (Note: I will use the actual lines below)
+
     id: number;
     name: string;
     description: string;
@@ -101,7 +106,19 @@ export default function GithubSection() {
                     {loading ? (
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             {[1, 2, 3, 4].map((i) => (
-                                <div key={i} className="glass-card h-40 animate-pulse bg-white/5" />
+                                <div key={i} className="glass-card p-6 flex flex-col h-40 border border-white/5 space-y-4">
+                                    <div className="flex justify-between items-start">
+                                        <Skeleton className="h-6 w-3/4" />
+                                        <Skeleton className="h-4 w-4" />
+                                    </div>
+                                    <Skeleton className="h-4 w-full" />
+                                    <Skeleton className="h-4 w-2/3" />
+                                    <div className="flex gap-4 mt-auto">
+                                        <Skeleton className="h-3 w-16" />
+                                        <Skeleton className="h-3 w-12" />
+                                        <Skeleton className="h-3 w-12" />
+                                    </div>
+                                </div>
                             ))}
                         </div>
                     ) : (

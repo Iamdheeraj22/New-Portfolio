@@ -8,7 +8,12 @@ import Link from "next/link";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
+import { Skeleton } from "@/components/ui/Skeleton";
+
 interface RepoDetails {
+// ... existing interface ...
+// (Note: I will use the actual lines below)
+
     name: string;
     description: string;
     html_url: string;
@@ -73,8 +78,63 @@ export default function RepositoryDetailsPage() {
 
     if (loading) {
         return (
-            <div className="min-h-screen pt-32 pb-20 flex justify-center items-center">
-                <div className="w-16 h-16 border-4 border-primary-500 border-t-transparent rounded-full animate-spin"></div>
+            <div className="min-h-screen pb-20 relative">
+                <div className="sticky top-0 left-0 w-full z-50 glass py-4 border-b border-white/5 mb-8">
+                    <div className="container mx-auto px-6 max-w-5xl flex items-center">
+                        <Skeleton className="h-6 w-20" />
+                    </div>
+                </div>
+
+                <div className="container mx-auto px-6 max-w-5xl relative z-10">
+                    {/* Header Skeleton */}
+                    <div className="glass-card p-8 mb-8 border border-white/10">
+                        <div className="flex flex-col md:flex-row md:items-start justify-between gap-6">
+                            <div className="flex-1 space-y-4">
+                                <Skeleton className="h-12 w-1/2" />
+                                <Skeleton className="h-6 w-3/4" />
+                                <div className="flex gap-2">
+                                    <Skeleton className="h-6 w-20 rounded-full" />
+                                    <Skeleton className="h-6 w-20 rounded-full" />
+                                    <Skeleton className="h-6 w-20 rounded-full" />
+                                </div>
+                                <Skeleton className="h-12 w-48 rounded-xl" />
+                            </div>
+                            <div className="grid grid-cols-2 gap-4 md:w-64 shrink-0">
+                                <Skeleton className="h-24 w-full rounded-xl" />
+                                <Skeleton className="h-24 w-full rounded-xl" />
+                                <Skeleton className="h-24 w-full rounded-xl" />
+                                <Skeleton className="h-24 w-full rounded-xl" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="grid md:grid-cols-3 gap-8">
+                        <div className="md:col-span-2 glass-card p-8 border border-white/10 space-y-6">
+                            <Skeleton className="h-8 w-40" />
+                            <div className="space-y-3">
+                                <Skeleton className="h-4 w-full" />
+                                <Skeleton className="h-4 w-full" />
+                                <Skeleton className="h-4 w-4/5" />
+                                <Skeleton className="h-4 w-full" />
+                                <Skeleton className="h-4 w-3/4" />
+                            </div>
+                        </div>
+                        <div className="glass-card p-6 border border-white/10 h-fit space-y-6">
+                            <Skeleton className="h-8 w-1/2" />
+                            <Skeleton className="h-3 w-full rounded-full" />
+                            <div className="space-y-4">
+                                <div className="flex justify-between">
+                                    <Skeleton className="h-4 w-20" />
+                                    <Skeleton className="h-4 w-10" />
+                                </div>
+                                <div className="flex justify-between">
+                                    <Skeleton className="h-4 w-20" />
+                                    <Skeleton className="h-4 w-10" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         );
     }
