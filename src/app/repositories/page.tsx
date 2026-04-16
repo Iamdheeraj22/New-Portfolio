@@ -178,41 +178,42 @@ export default function RepositoriesPage() {
 
                         {/* Pagination */}
                         {totalPages > 1 && (
-                            <div className="flex justify-center items-center gap-4">
-                                <motion.button
-                                    whileHover={{ scale: 1.1 }}
-                                    whileTap={{ scale: 0.9 }}
-                                    disabled={currentPage === 1}
-                                    onClick={() => setCurrentPage(prev => prev - 1)}
-                                    className="p-2 rounded-lg bg-white/5 border border-white/10 disabled:opacity-30 disabled:cursor-not-allowed hover:bg-white/10 transition-colors"
-                                >
-                                    <ChevronLeft className="w-5 h-5" />
-                                </motion.button>
-
-                                <div className="flex items-center gap-2">
-                                    {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
-                                        <button
-                                            key={page}
-                                            onClick={() => setCurrentPage(page)}
-                                            className={`w-10 h-10 rounded-lg border transition-all ${currentPage === page
-                                                    ? "bg-primary-600 border-primary-500 text-white shadow-lg shadow-primary-500/20"
-                                                    : "bg-white/5 border-white/10 text-foreground/60 hover:bg-white/10"
-                                                }`}
+                            <div className="flex justify-center items-center gap-8 mt-12">
+                                <div className="w-32 flex justify-end">
+                                    {currentPage > 1 && (
+                                        <motion.button
+                                            whileHover={{ scale: 1.05, x: -4 }}
+                                            whileTap={{ scale: 0.95 }}
+                                            onClick={() => setCurrentPage(prev => prev - 1)}
+                                            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 transition-all text-sm font-bold text-foreground/80 hover:text-primary-500"
                                         >
-                                            {page}
-                                        </button>
-                                    ))}
+                                            <ChevronLeft className="w-4 h-4" />
+                                            Previous
+                                        </motion.button>
+                                    )}
                                 </div>
 
-                                <motion.button
-                                    whileHover={{ scale: 1.1 }}
-                                    whileTap={{ scale: 0.9 }}
-                                    disabled={currentPage === totalPages}
-                                    onClick={() => setCurrentPage(prev => prev + 1)}
-                                    className="p-2 rounded-lg bg-white/5 border border-white/10 disabled:opacity-30 disabled:cursor-not-allowed hover:bg-white/10 transition-colors"
-                                >
-                                    <ChevronRight className="w-5 h-5" />
-                                </motion.button>
+                                <div className="flex items-center gap-2 text-sm font-bold">
+                                    <span className="w-10 h-10 flex items-center justify-center rounded-lg bg-primary-600 border border-primary-500 text-white shadow-lg shadow-primary-500/20">
+                                        {currentPage}
+                                    </span>
+                                    <span className="text-foreground/40 mx-1">/</span>
+                                    <span className="text-foreground/60">{totalPages}</span>
+                                </div>
+
+                                <div className="w-32 flex justify-start">
+                                    {currentPage < totalPages && (
+                                        <motion.button
+                                            whileHover={{ scale: 1.05, x: 4 }}
+                                            whileTap={{ scale: 0.95 }}
+                                            onClick={() => setCurrentPage(prev => prev + 1)}
+                                            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 transition-all text-sm font-bold text-foreground/80 hover:text-primary-500"
+                                        >
+                                            Next
+                                            <ChevronRight className="w-4 h-4" />
+                                        </motion.button>
+                                    )}
+                                </div>
                             </div>
                         )}
                     </>
