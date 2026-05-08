@@ -55,6 +55,9 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
+  verification: {
+    google: "euk647HmJSByTbO-SlBKB6Mx4b_ona0d26U6PYxzit8",
+  },
 };
 
 // Structured Data (JSON-LD)
