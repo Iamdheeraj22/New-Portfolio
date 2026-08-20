@@ -6,6 +6,8 @@ import Footer from "@/components/layout/Footer";
 import CustomCursor from "@/components/ui/CustomCursor";
 import ScrollProgress from "@/components/ui/ScrollProgress";
 import PageLoader from "@/components/ui/PageLoader";
+import Script from "next/script";
+
 
 const inter = Inter({
   variable: "--font-inter",
@@ -98,6 +100,12 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+        <Script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6702929872694306"
+          crossOrigin="anonymous"
+          strategy="afterInteractive"
         />
       </head>
       <body className={`${inter.variable} antialiased bg-background text-foreground min-h-screen flex flex-col relative`}>
